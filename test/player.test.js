@@ -1,5 +1,6 @@
-const Player = require('../support/player');      
-const GameBoard = require('../support/gameBoard'); 
+const Player = require('../support/player');
+const GameBoard = require('../support/gameBoard');
+const Ship = require('../support/ship');  // Add this import
 
 describe('Player class', () => {
   let player;
@@ -25,7 +26,8 @@ describe('Player class', () => {
   });
 
   test('Firing a shot returns hit or miss as expected', () => {
-    opponentBoard.placeShip(1, 0, 0);
+    const testShip = new Ship(1, 'testShip');  // This needs Ship class
+    opponentBoard.placeShip(testShip, [0, 0], 'x');
 
     let result = player.fireShot(0, 0, opponentBoard);
     expect(result).toBe('hit');

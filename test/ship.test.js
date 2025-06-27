@@ -23,3 +23,8 @@ test('check if isSunk works', () => {
     expect(Ship.isSunk()).toBe(true)
 
 })
+
+test('tests name', () => {
+    const Ship = new ship(3, 'ellen');
+    expect(Ship.name).toBe('ellen');
+})

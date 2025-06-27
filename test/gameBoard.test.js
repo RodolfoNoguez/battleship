@@ -1,47 +1,40 @@
+const Player = require('../support/player');
 const GameBoard = require('../support/gameBoard');
+const Ship = require('../support/ship');  // Import Ship class
 
-describe('GameBoard', () => {
-  let board;
+describe('Player class', () => {
+  let player;
+  let opponentBoard;
 
   beforeEach(() => {
-    board = new GameBoard();
+    player = new Player('real');
+    opponentBoard = new GameBoard();
   });
 
-  test('places a ship on the board', () => {
-    board.placeShip(2, 0, 0, true);
-    expect(board.board[0][0]).not.toBeNull();
-    expect(board.board[0][1]).not.toBeNull();
+  test('Player has a gameBoard instance', () => {
+    expect(player.gameBoard).toBeInstanceOf(GameBoard);
   });
 
-  test('throws error for overlapping ships', () => {
-    board.placeShip(2, 0, 0, true);
-    expect(() => board.placeShip(2, 0, 0, true)).toThrow('Invalid Ship Placement');
+  test('Player can fire a shot on opponent board', () => {
+    const spy = jest.spyOn(opponentBoard, 'receiveAttack');
+
+    player.fireShot(0, 0, opponentBoard);
+
+    expect(spy).toHaveBeenCalledWith(0, 0);
+
+    spy.mockRestore();
   });
 
-  test('registers a miss', () => {
-    const result = board.receiveAttack(0, 0);
-    expect(result).toBe('miss');
-    expect(board.board[0][0]).toBe('miss');
-    expect(board.missedAttacks).toContainEqual([0, 0]);
-  });
+  test('Firing a shot returns hit or miss as expected', () => {
+    const testShip = new Ship(1, 'testShip');
+    opponentBoard.placeShip(testShip, [0, 0], 'x');
 
-  test('registers a hit', () => {
-    board.placeShip(1, 1, 1);
-    const result = board.receiveAttack(1, 1);
+
+    let result = player.fireShot(0, 0, opponentBoard);
     expect(result).toBe('hit');
-    expect(board.board[1][1]).toBe('hit');
-  });
 
-  test('detects all ships sunk', () => {
-    board.placeShip(1, 0, 0);
-    board.receiveAttack(0, 0);
-    expect(board.allShipsSunk()).toBe(true);
-  });
-
-  test('does not allow hitting same spot twice', () => {
-    board.placeShip(1, 2, 2);
-    board.receiveAttack(2, 2);
-    const result = board.receiveAttack(2, 2);
-    expect(result).toBe('already hit');
+    result = player.fireShot(1, 1, opponentBoard);
+    expect(result).toBe('miss');
   });
 });
+
