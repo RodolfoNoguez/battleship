@@ -1,7 +1,7 @@
 const Player  = require('./player');
 
 
-function createPlayers(name){
+export function createPlayers(name){
     const player = new Player(name);
     const computer = new Player();
 
@@ -9,7 +9,7 @@ function createPlayers(name){
 }
 
 
-function placeShips(gameboard){
+export function placeShips(gameboard){
     placeShip(gameboard, gameboard.carrier);
     placeShip(gameboard, gameboard.battleship);
     placeShip(gameboard, gameboard.cruiser);
@@ -36,6 +36,31 @@ function generateRandomCordinates(){
         i: Math.floor(Math.random() * (9 - 0 + 1) + 0),
         j: Math.floor(Math.random() * (9 - 0 + 1) + 0),
       };
+}
+
+export function isAlreadyAttacked(cell){
+    return cell.classList.contains('miss') || cell.classList.contains('hit')
+}
+
+
+export function findUnattackedCell(playerboard){
+    let { i,j } = generateRandomCordinates();
+    
+    const cell = playerboard.querySelectot(`[data-coordinate='${i},${j}']`);
+    let alreadyAttacked = isAlreadyAttacked();
+    
+    while(alreadyAttacked){
+        ({ i, j } = generateRandomCordinates());
+
+        const cell = playerboard.querySelectot(`[data-coordinate='${i},${j}']`);
+        let alreadyAttacked = isAlreadyAttacked();
+    }
+     return [i, j];
+}   
+
+export function delayRendering(callback){
+    setTimeout(callback, 1000);
+
 }
 
 
