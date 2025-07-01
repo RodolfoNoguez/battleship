@@ -57,7 +57,7 @@ export function listeOnEnemyAttack(){
 
     const enemyboard = document.querySelector('.computer-board');
     if(enemyboard){
-        enemyboard.addEventListener('click', handleEnemyBoardClick);
+        enemyboard.addEventListener('click', enemyBoardClick);
     }
 }
 
