@@ -52,7 +52,7 @@ function enemyBoardClick(e){
      }
 }
 
-export function listeOnEnemyAttack(){
+export function listenOnEnemyBoardAttack(){
     if(!playerTurn){return};
 
     const enemyboard = document.querySelector('.computer-board');
@@ -88,7 +88,7 @@ function handleAttack(board, coordinates){
 
     if(board.allSunk){
         gameOver = true;
-        announceWinner(player.gamboard.allSunk ? undefined: player.name);
+        announceWinner(player.gameboard.allSunk ? undefined: player.name);
         listenOnRestartGameButton();
     }
 }
@@ -131,13 +131,12 @@ function handleCellClick(coordinates, ship){
     listenOnShipDirectionChange();
 }
 
+export function listenOnCellClick(cell, coordinates, ship) {
+    cell.addEventListener('click', () => {
+      handleCellClick(coordinates, ship);
+    });
+  }
 
-export function listenShipDirectionChange(){
-    const shipDirection = document.querySelector('.ship-direction');
-    shipDirection.addEventListener('click', () => {
-        handleCellClick(coordinates, ship);
-    })
-}
 
 function listenOnShipDirectionChange(){
     const shipDirection = document.querySelector9('.ship-direction');
