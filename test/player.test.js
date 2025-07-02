@@ -1,6 +1,6 @@
-const Player = require('../support/player');
-const GameBoard = require('../support/gameBoard');
-const Ship = require('../support/ship');  // Add this import
+import GameBoard from '../support/gameBoard.js';
+import Player from '../support/player.js';
+import Ship from '../support/ship.js';
 
 describe('Player class', () => {
   let player;

@@ -1,16 +1,11 @@
-const GameBoard = require('./gameBoard');
 
-class Player {
-    constructor(type = 'real') {
-      if (type !== 'real' && type !== 'computer') {
-        throw new Error("Player type must be 'real' or 'computer'");
-      }
-      this.type = type;
+import GameBoard from './gameBoard.js';
+
+export default class Player {
+    constructor(name = 'computer') {
+      this.name = name;
       this.gameboard = new GameBoard();
-    }
-    fireShot(x, y , opponentBoard){
-        return opponentBoard.receiveAttack(x, y);
     }
   }
 
-module.exports = Player
+

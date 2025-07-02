@@ -1,6 +1,6 @@
-const ship = require('../support/ship');
+import Ship from '../support/ship.js'
 
-const Ship = new ship();
+const Ship = new Ship();
 
 
 test('test ship with length 3', () => {

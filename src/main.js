@@ -1,6 +1,8 @@
-import { createPlayers, isAlreadyAttacked } from '../support/utils';
 import './style.css'
+import './normalize.css'
 
+import { createPlayers, placeShips, findRandomUnattackedCell, isAlreadyAttacked, delayRendering, } from '../support/utils.js';
+import { announceWinner, updateStatus, renderPlacingShipsInterface, handleHovering, updateGameView, toggleEnemyBoardInteraction, } from '../support/dom.js';
 
 let player, computer;
 let playerTurn = Math.random() < 0.5 ? true: false;
@@ -8,13 +10,13 @@ let numberOfShipsLeftToPlace = 5;
 let axis = 'x';
 let gameOver = false;
 
-function handleNameimput(name){
+function handleNameImput(){
     const name = nameInput.value.trim();
-    if(name.toLowerCase === 'computer' ||  name ===''){return}
+    if(name.toLowerCase() === 'computer' ||  name ===''){return}
 
     ({player, computer} = createPlayers(name))
 
-    PlacingShipsInterface(player.gameboard, axis);
+    renderPlacingShipsInterface(player.gameboard, axis);
     listenOnBoardHovering();
     listenOnShipDirectionChange();
 
@@ -25,13 +27,13 @@ function handleNameimput(name){
 const nameInput = document.querySelector('.name-input');
 nameInput.addEventListener('key down', (e) => {
     if(e.key === enter){
-        handleNameimput()
+        handleNameImput()
     }
 })
 //when start is clicked
 const startButton = document.querySelector('.start');
 startButton.addEventListener('click', () => {
-    handleNameimput();
+    handleNameImput();
 })
 
 
@@ -139,7 +141,7 @@ export function listenOnCellClick(cell, coordinates, ship) {
 
 
 function listenOnShipDirectionChange(){
-    const shipDirection = document.querySelector9('.ship-direction');
+    const shipDirection = document.querySelector('.ship-direction');
     shipDirection.addEventListener('click', () => {
         axis = axis === "x" ? "y" : "x";
 

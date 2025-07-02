@@ -1,4 +1,5 @@
-const Player  = require('./player');
+import GameBoard from './gameBoard.js'; 
+import Player from './player.js'
 
 
 export function createPlayers(name){
@@ -18,20 +19,20 @@ export function placeShips(gameboard){
 }
 
 
-function placeShip(gameboard, ship){
-    let { i, j } = generateRandomCordinates();
-    let axis = Math.random() < .5 ? 'x': 'y';
-    
-
-    while(!GameBoard.canPlaceShip(ship, [i,j], axis)){
-        ({ i,j }) = generateRandomCordinates();
-        axis = Math.random() < .5 ? 'x': 'y';
+function placeShip(board, ship) {
+    let axis = Math.random() < 0.5 ? 'x' : 'y';
+    let { i, j } = generateRandomCoordinates();
+  
+    while (!board.canPlaceShip(ship, [i, j], axis)) {
+      ({ i, j } = generateRandomCoordinates());
+      axis = Math.random() < 0.5 ? 'x' : 'y';
     }
+  
+    board.placeShip(ship, [i, j], axis); 
+  }
+  
 
-    gameboard.placeShip(ship, [i, j], axis);
-}
-
-function generateRandomCordinates(){
+function generateRandomCoordinates(){
     return {
         i: Math.floor(Math.random() * (9 - 0 + 1) + 0),
         j: Math.floor(Math.random() * (9 - 0 + 1) + 0),
@@ -43,7 +44,7 @@ export function isAlreadyAttacked(cell){
 }
 
 
-export function findUnattackedCell(playerboard){
+export function findRandomUnattackedCell(playerboard){
     let { i,j } = generateRandomCordinates();
     
     const cell = playerboard.querySelectot(`[data-coordinate='${i},${j}']`);

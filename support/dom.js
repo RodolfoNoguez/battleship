@@ -2,13 +2,13 @@ import { listenOnEnemyBoardAttack, attackPlayerBoard, listenOnCellClick } from "
 
 
 
-export function renderPlacingShipInterface(playerBoard, axis){
+export function renderPlacingShipsInterface(playerBoard, axis){
     clearMain();
 
     const borderContainer = createBoardContainer(playerBoard);
     const shipDirection = createShipDirectionButton(axis);
 
-    const  main = document.querySelector('.main');
+    const  main = document.querySelector('main');
     main.append(borderContainer, shipDirection);
 }
 
@@ -142,7 +142,7 @@ export function handleHovering(e, numberOfShipsLeftToPlace, player, axis, placeS
 
 
 export function clearMain(){
-    const main = document.querySelector('.main')
+    const main = document.querySelector('main')
     main.innerHTML = '';
 }
 
