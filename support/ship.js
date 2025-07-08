@@ -1,18 +1,26 @@
-export default class ship{
-    constructor(length, name){
-        this.length = length;
-        this.hits = 0;
-        this.name = name
+export default class Ship {
+    #hits = 0;
+  
+    constructor(length, name) {
+      this.shipLength = length;
+      this.name = name;
     }
-
-    hit(){
-        this.hits++;
+  
+    get hits() {
+      return this.#hits;
     }
-
-    isSunk(){
-        return this.hits >= this.length
+  
+    hit() {
+      if (this.#hits < this.shipLength) {
+        this.#hits += 1;
+      }
     }
-
-}       
-
+  
+    isSunk() {
+      if (this.#hits === this.shipLength) {
+        return true;
+      }
+      return false;
+    }
+  }
 
