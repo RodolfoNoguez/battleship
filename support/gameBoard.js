@@ -116,7 +116,6 @@ export default class Gameboard {
       return;
     }
 
-    // Record an attack on the ship
     this.board[coordinates[0]][coordinates[1]].ship.hit();
     this.board[coordinates[0]][coordinates[1]].hit = true;
 

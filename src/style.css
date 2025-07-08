@@ -1,0 +1,333 @@
+@font-face {
+    font-family: 'EFCO Brookshire';
+    src: url('../assets/fonts/efco-bookshire-regular.ttf');
+
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100vh;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'EFCO Brookshire', Arial, Helvetica, sans-serif;
+    background: linear-gradient(
+      90deg,
+      rgb(31, 38, 61) 0%,
+      rgb(47, 61, 99) 29%,
+      rgb(43, 55, 92) 76%,
+      rgb(31, 38, 61) 100%
+    );
+  }
+  
+  header {
+    height: fit-content;
+    padding-top: 150px;
+  }
+  
+  .logo {
+    background: url('../assets/images/red-ship.png');
+    height: 100px;
+    width: 170px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    margin: 0 auto;
+    justify-self: center;
+  }
+  
+  main {
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .new-game {
+    margin-top: 60px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .name {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .enter-name {
+    font-size: 1.2rem;
+  }
+  
+  .name-input {
+    padding-left: 10px;
+    width: 100%;
+    height: 30px;
+    color: #374772;
+    border-radius: 2px;
+    border: none;
+    background: linear-gradient(
+      90deg,
+      rgb(152, 152, 147) 0%,
+      rgb(244, 238, 205) 10%,
+      rgb(244, 238, 205) 90%,
+      rgb(152, 152, 147) 100%
+    );
+  }
+  
+  .name-input:focus {
+    outline: none;
+  }
+  
+  .name-input::placeholder {
+    font-size: 0.9rem;
+  }
+  
+  .start,
+  .restart, .ship-direction {
+    width: 100px;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    background: linear-gradient(
+      90deg,
+      rgb(219, 206, 150) 0%,
+      rgb(255, 243, 187) 29%,
+      rgb(255, 243, 187) 76%,
+      rgb(219, 206, 150) 100%
+    );
+    color: #4e5f8e;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  
+  .start:active,
+  .restart:active, .ship-direction:active {
+    color: #374772;
+    background: linear-gradient(
+      90deg,
+      rgb(255, 243, 187) 0%,
+      rgb(219, 206, 150) 29%,
+      rgb(219, 206, 150) 76%,
+      rgb(255, 243, 187) 100%
+    );
+  }
+  
+  .boards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .board-title {
+    color: rgb(237, 196, 115);
+    font-size: 1.2rem;
+  }
+  
+  .board {
+    border: 2px solid rgb(255, 253, 244);
+    display: grid;
+    grid-template-columns: repeat(10, 20px);
+    grid-template-rows: repeat(10, 20px);
+    gap: 1px;
+  }
+  
+  .cell, .place-cell {
+    border: 1px solid rgb(255, 253, 244);
+  }
+  
+  .computer-board .cell {
+    cursor: pointer;
+  }
+  
+  .computer-board .cell:hover {
+    border: 3px solid rgb(132, 205, 72);
+    cursor: crosshair;
+  }
+  
+  .can-place {
+    cursor: crosshair;
+    background: rgba(143, 231, 71, 0.5);
+  }
+  
+  .player-board .occupied, .board .occupied {
+    background: rgb(237, 196, 115);
+  }
+  
+  .missed {
+    background: url('../assets/images/missed.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  .board .hit {
+    background: url('../assets/images/hit.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  .computer-board .hit:hover,
+  .computer-board .missed:hover {
+    cursor: not-allowed;
+    border: 3px solid red;
+  }
+  
+  .can-not-place:hover {
+    cursor: not-allowed;
+    background: rgba(255, 0, 0, 0.4);
+  }
+  
+  .status-container {
+    background: rgba(94, 114, 170, 0.4);
+    height: fit-content;
+    padding: 25px 40px;
+    border-radius: 4px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+  }
+  
+  .status {
+    font-size: 1.1rem;
+  }
+  
+  .status,
+  .enter-name {
+    color: rgb(237, 196, 115);
+    text-align: center;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  .game-end-message {
+    color: rgb(237, 196, 115);
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .restart {
+    margin-top: 100px;
+    width: 180px;
+    font-size: 1.6rem;
+    padding: 10px 5px;
+  }
+  
+  .place-ship-board-title {
+    color: rgb(237, 196, 115);
+    font-weight: normal;
+  }
+  
+  .ship-direction {
+    margin-top: 20px;
+  }
+  
+  footer {
+    width: 100%;
+    min-height: 40px;
+    font-size: 0.9rem;
+    margin-top: auto;
+    background: linear-gradient(
+      90deg,
+      rgb(152, 152, 147) 0%,
+      rgb(244, 238, 205) 29%,
+      rgb(244, 238, 205) 76%,
+      rgb(152, 152, 147) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #374772;
+  }
+  
+  footer a {
+    text-decoration: none;
+    color: #566daf;
+  }
+  
+  footer a:hover {
+    color: #3351a3;
+  }
+  
+  footer a:active {
+    color: #4f66a6;
+  }
+  
+  .clickable {
+    pointer-events: none;
+  }
+  
+  @media screen and (min-width: 500px) {
+    .logo {
+      height: 100px;
+      width: 200px;
+    }
+  }
+  
+  @media screen and (min-width: 600px) {
+    .boards-container {
+      flex-direction: row;
+      gap: 50px;
+    }
+  
+    .status-container {
+      width: 500px;
+      margin-top: 40px;
+    }
+  }
+  
+  @media screen and (min-width: 700px) {
+    .board {
+      grid-template-columns: repeat(10, 30px);
+      grid-template-rows: repeat(10, 30px);
+      gap: 1px;
+    }
+  
+    .board-title {
+      font-size: 1.4rem;
+    }
+  
+    .status {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .new-game {
+      width: 300px;
+      gap: 30px;
+    }
+  
+    .name {
+      gap: 30px;
+    }
+  
+    .enter-name {
+      font-size: 1.4rem;
+    }
+  
+    .board-title {
+      font-size: 1.6rem;
+    }
+  }
